@@ -756,19 +756,13 @@ class Form extends Fieldset implements FormInterface
                         continue;
                     }
                     // Create a new empty default input for this element
-                    $spec  = array('name' => $name, 'required' => false);
-                    $input = $inputFactory->createInput($spec);
+                    $spec = array('name' => $name, 'required' => false);
                 } else {
                     // Create an input based on the specification returned from the element
                     $spec  = $element->getInputSpecification();
-                    $input = $inputFactory->createInput($spec);
-
-                    if ($inputFilter->has($name)) {
-                        $input->merge($inputFilter->get($name));
-                        $inputFilter->remove($name);
-                    }
                 }
 
+                $input = $inputFactory->createInput($spec);
                 $inputFilter->add($input, $name);
             }
 
